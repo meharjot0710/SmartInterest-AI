@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 
 # Define the number of rows
-num_rows = 4000
+num_rows = 300000
 
 # Define subjects and project domains
 subjects = ['Operating System', 'DSA', 'Frontend', 'Backend', 'Machine Learning', 'Data Analytics']

@@ -18,7 +18,7 @@ subject_to_domain = {
     'Frontend': ['Web Development'],
     'Backend': ['Web Development'],
     'Machine Learning': ['AI', 'Data Science', 'Machine Learning'],
-    'Data Analytics': ['Data Science']
+    'Data Analytics': ['Data Science','Machine Learning','AI']
 }
 
 # Function to determine interest label
