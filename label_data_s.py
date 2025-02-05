@@ -13,8 +13,8 @@ df[subject_cols] = df[subject_cols].apply(pd.to_numeric, errors='coerce')
 
 # Define a mapping of subjects to related project domains
 subject_to_domain = {
-    'Operating System': ['Cybersecurity', 'Robotics'],
-    'DSA': ['AI', 'Machine Learning'],
+    'Operating System': ['Cybersecurity', 'Robotics','Game Development'],
+    'DSA': ['AI', 'Machine Learning','Cybersecurity','Game Development'],
     'Frontend': ['Web Development'],
     'Backend': ['Web Development'],
     'Machine Learning': ['AI', 'Data Science', 'Machine Learning'],
