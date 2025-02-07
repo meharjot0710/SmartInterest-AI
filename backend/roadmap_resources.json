@@ -1,0 +1,472 @@
+{
+    "AI": {
+        "prerequisites": [
+            "Basic programming (Python preferred)",
+            "Understanding of linear algebra & probability"
+        ],
+        "levels": {
+            "Beginner": {
+                "topics": [
+                    "Python for AI",
+                    "Basic Statistics",
+                    "Introduction to Machine Learning"
+                ],
+                "projects": [
+                    "Spam Email Classifier",
+                    "Stock Price Prediction"
+                ],
+                "resources": [
+                    {
+                        "name": "AI Roadmap",
+                        "link": "https://roadmap.sh/ai"
+                    },
+                    {
+                        "name": "Machine Learning by Andrew Ng",
+                        "link": "https://www.coursera.org/learn/machine-learning"
+                    }
+                ],
+                "time_estimate": "2-3 months"
+            },
+            "Intermediate": {
+                "topics": [
+                    "Neural Networks",
+                    "Deep Learning",
+                    "Computer Vision & NLP"
+                ],
+                "projects": [
+                    "Image Recognition System",
+                    "Chatbot using NLP"
+                ],
+                "resources": [
+                    {
+                        "name": "Deep Learning Specialization",
+                        "link": "https://www.coursera.org/specializations/deep-learning"
+                    },
+                    {
+                        "name": "Fast.ai Practical Deep Learning",
+                        "link": "https://course.fast.ai/"
+                    }
+                ],
+                "time_estimate": "3-5 months"
+            },
+            "Advanced": {
+                "topics": [
+                    "Reinforcement Learning",
+                    "AI Ethics & Explainability",
+                    "Generative AI (GANs, Transformers)"
+                ],
+                "projects": [
+                    "Self-driving Car Simulation",
+                    "AI-powered Art Generator"
+                ],
+                "resources": [
+                    {
+                        "name": "Advanced AI - MIT OpenCourseWare",
+                        "link": "https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-825-techniques-in-artificial-intelligence-fall-2002/"
+                    }
+                ],
+                "time_estimate": "4-8 months"
+            }
+        }
+    },
+    "Web Development": {
+        "prerequisites": [
+            "Basic programming (Python/JavaScript)",
+            "HTML & CSS basics"
+        ],
+        "levels": {
+            "Beginner": {
+                "topics": [
+                    "HTML",
+                    "CSS",
+                    "JavaScript Basics",
+                    "Responsive Design"
+                ],
+                "projects": [
+                    "Personal Portfolio",
+                    "Simple To-Do App"
+                ],
+                "resources": [
+                    {
+                        "name": "Frontend Roadmap",
+                        "link": "https://roadmap.sh/frontend"
+                    },
+                    {
+                        "name": "HTML & CSS Course",
+                        "link": "https://www.freecodecamp.org"
+                    }
+                ],
+                "time_estimate": "1-2 months"
+            },
+            "Intermediate": {
+                "topics": [
+                    "React.js",
+                    "Node.js",
+                    "APIs",
+                    "Authentication"
+                ],
+                "projects": [
+                    "E-commerce Website",
+                    "Chat Application"
+                ],
+                "resources": [
+                    {
+                        "name": "React Course",
+                        "link": "https://react.dev"
+                    },
+                    {
+                        "name": "Full-Stack Development",
+                        "link": "https://www.udemy.com/course/full-stack-web-development"
+                    }
+                ],
+                "time_estimate": "2-4 months"
+            },
+            "Advanced": {
+                "topics": [
+                    "Performance Optimization",
+                    "Scalability",
+                    "Security"
+                ],
+                "projects": [
+                    "Social Media App",
+                    "Real-time Dashboard"
+                ],
+                "resources": [
+                    {
+                        "name": "Advanced Web Dev",
+                        "link": "https://www.frontendmasters.com"
+                    }
+                ],
+                "time_estimate": "3-6 months"
+            }
+        }
+    },"Machine Learning": {
+        "prerequisites": [
+            "Python programming",
+            "Basic math (linear algebra, probability)"
+        ],
+        "levels": {
+            "Beginner": {
+                "topics": [
+                    "Supervised vs Unsupervised Learning",
+                    "Linear Regression",
+                    "Decision Trees"
+                ],
+                "projects": [
+                    "House Price Prediction",
+                    "Handwritten Digit Recognition"
+                ],
+                "resources": [
+                    {
+                        "name": "Machine Learning Roadmap",
+                        "link": "https://roadmap.sh/machine-learning"
+                    }
+                ],
+                "time_estimate": "2-4 months"
+            },
+            "Intermediate": {
+                "topics": [
+                    "Neural Networks",
+                    "SVM & Random Forest",
+                    "Feature Engineering"
+                ],
+                "projects": [
+                    "Fraud Detection System",
+                    "Medical Diagnosis Model"
+                ],
+                "resources": [
+                    {
+                        "name": "Hands-On ML with Scikit-Learn",
+                        "link": "https://www.oreilly.com/library/view/hands-on-machine-learning/"
+                    }
+                ],
+                "time_estimate": "3-5 months"
+            },
+            "Advanced": {
+                "topics": [
+                    "Deep Learning Architectures",
+                    "Reinforcement Learning",
+                    "Federated Learning"
+                ],
+                "projects": [
+                    "Autonomous Drone Navigation",
+                    "AI-driven Trading System"
+                ],
+                "resources": [
+                    {
+                        "name": "Deep Learning Book by Ian Goodfellow",
+                        "link": "https://www.deeplearningbook.org/"
+                    }
+                ],
+                "time_estimate": "5-8 months"
+            }
+        }
+    },
+    "Cybersecurity": {
+        "prerequisites": [
+            "Basic networking knowledge",
+            "Linux command line basics"
+        ],
+        "levels": {
+            "Beginner": {
+                "topics": [
+                    "Network Security",
+                    "Basic Cryptography",
+                    "Web Security"
+                ],
+                "projects": [
+                    "Password Strength Checker",
+                    "Basic Firewall Implementation"
+                ],
+                "resources": [
+                    {
+                        "name": "Cybersecurity Roadmap",
+                        "link": "https://roadmap.sh/cyber-security"
+                    }
+                ],
+                "time_estimate": "3-5 months"
+            },
+            "Intermediate": {
+                "topics": [
+                    "Ethical Hacking",
+                    "Penetration Testing",
+                    "Secure Coding"
+                ],
+                "projects": [
+                    "Vulnerability Scanner",
+                    "Malware Detection System"
+                ],
+                "resources": [
+                    {
+                        "name": "Practical Ethical Hacking Course",
+                        "link": "https://www.udemy.com/course/practical-ethical-hacking"
+                    }
+                ],
+                "time_estimate": "4-6 months"
+            },
+            "Advanced": {
+                "topics": [
+                    "Advanced Threat Hunting",
+                    "Red Team vs Blue Team",
+                    "Cyber Warfare"
+                ],
+                "projects": [
+                    "Full-Scale Cybersecurity System",
+                    "AI-based Intrusion Detection"
+                ],
+                "resources": [
+                    {
+                        "name": "Offensive Security Certified Professional (OSCP)",
+                        "link": "https://www.offensive-security.com/"
+                    }
+                ],
+                "time_estimate": "6-10 months"
+            }
+        }
+    },
+    "Data Science": {
+        "prerequisites": [
+            "Python programming",
+            "Basic statistics & probability"
+        ],
+        "levels": {
+            "Beginner": {
+                "topics": [
+                    "Data Cleaning & Visualization",
+                    "Pandas & NumPy Basics"
+                ],
+                "projects": [
+                    "Data Dashboard",
+                    "EDA on a Public Dataset"
+                ],
+                "resources": [
+                    {
+                        "name": "Data Science Roadmap",
+                        "link": "https://roadmap.sh/data-science"
+                    }
+                ],
+                "time_estimate": "2-4 months"
+            },
+            "Intermediate": {
+                "topics": [
+                    "Big Data & SQL",
+                    "Time Series Analysis",
+                    "Feature Engineering"
+                ],
+                "projects": [
+                    "Customer Churn Prediction",
+                    "Stock Market Analysis"
+                ],
+                "resources": [
+                    {
+                        "name": "Data Science Specialization",
+                        "link": "https://www.coursera.org/specializations/data-science"
+                    }
+                ],
+                "time_estimate": "4-6 months"
+            },
+            "Advanced": {
+                "topics": [
+                    "Deep Learning for Data Science",
+                    "Real-time Data Processing",
+                    "AI in Data Science"
+                ],
+                "projects": [
+                    "Recommender System",
+                    "Automated Data Analysis Pipeline"
+                ],
+                "resources": [
+                    {
+                        "name": "Data Science for AI",
+                        "link": "https://www.datasciencecentral.com/"
+                    }
+                ],
+                "time_estimate": "6-10 months"
+            }
+        }
+    },
+        "Robotics": {
+            "prerequisites": [
+                "Basic electronics knowledge",
+                "Python or C++ programming"
+            ],
+            "levels": {
+                "Beginner": {
+                    "topics": [
+                        "Arduino & Raspberry Pi",
+                        "Basic Mechanics & Kinematics"
+                    ],
+                    "projects": [
+                        "Line Following Robot",
+                        "Automated Car Parking System"
+                    ],
+                    "resources": [
+                        {
+                            "name": "Robotics Roadmap",
+                            "link": "https://roadmap.sh/robotics"
+                        }
+                    ],
+                    "time_estimate": "3-6 months"
+                },
+                "Intermediate": {
+                    "topics": [
+                        "Embedded Systems",
+                        "Sensor Integration & IoT",
+                        "ROS (Robot Operating System)"
+                    ],
+                    "projects": [
+                        "Autonomous Drone Navigation",
+                        "Smart Robotic Arm"
+                    ],
+                    "resources": [
+                        {
+                            "name": "ROS for Beginners",
+                            "link": "https://www.theconstructsim.com/"
+                        },
+                        {
+                            "name": "IoT and Robotics Course",
+                            "link": "https://www.coursera.org/specializations/iot"
+                        }
+                    ],
+                    "time_estimate": "4-7 months"
+                },
+                "Advanced": {
+                    "topics": [
+                        "AI in Robotics",
+                        "SLAM (Simultaneous Localization and Mapping)",
+                        "Humanoid Robotics"
+                    ],
+                    "projects": [
+                        "Self-Balancing Robot",
+                        "Autonomous Warehouse Robot"
+                    ],
+                    "resources": [
+                        {
+                            "name": "Modern Robotics - Northwestern University",
+                            "link": "https://www.coursera.org/specializations/modernrobotics"
+                        },
+                        {
+                            "name": "AI-Powered Robotics",
+                            "link": "https://www.udacity.com/course/artificial-intelligence-for-robotics--cs373"
+                        }
+                    ],
+                    "time_estimate": "6-12 months"
+                }
+            }
+        },
+        "Game Development": {
+            "prerequisites": [
+                "Basic programming (C++/C# recommended)",
+                "Understanding of game engines (Unity, Unreal)"
+            ],
+            "levels": {
+                "Beginner": {
+                    "topics": [
+                        "Game Physics",
+                        "2D Game Development",
+                        "Unity Basics"
+                    ],
+                    "projects": [
+                        "Simple 2D Platformer",
+                        "Endless Runner Game"
+                    ],
+                    "resources": [
+                        {
+                            "name": "Game Development Roadmap",
+                            "link": "https://roadmap.sh/game-development"
+                        },
+                        {
+                            "name": "Unity Learn",
+                            "link": "https://learn.unity.com/"
+                        }
+                    ],
+                    "time_estimate": "2-5 months"
+                },
+                "Intermediate": {
+                    "topics": [
+                        "3D Game Development",
+                        "Game AI & Pathfinding",
+                        "Multiplayer Networking"
+                    ],
+                    "projects": [
+                        "3D First-Person Shooter",
+                        "Multiplayer Racing Game"
+                    ],
+                    "resources": [
+                        {
+                            "name": "Unreal Engine Course",
+                            "link": "https://www.udemy.com/course/unreal-engine-5/"
+                        },
+                        {
+                            "name": "Game AI Programming",
+                            "link": "https://www.gdcvault.com/play/1021849/Game-AI-Pro-5-Navigating"
+                        }
+                    ],
+                    "time_estimate": "4-8 months"
+                },
+                "Advanced": {
+                    "topics": [
+                        "Procedural Generation",
+                        "VR & AR Game Development",
+                        "Physics-based Simulations"
+                    ],
+                    "projects": [
+                        "Open World Game",
+                        "VR Escape Room"
+                    ],
+                    "resources": [
+                        {
+                            "name": "Advanced Game Design",
+                            "link": "https://www.coursera.org/learn/game-design-and-development"
+                        },
+                        {
+                            "name": "VR Development with Unity",
+                            "link": "https://www.oculus.com/developer/"
+                        }
+                    ],
+                    "time_estimate": "6-12 months"
+                }
+            }
+        }
+    }
+    

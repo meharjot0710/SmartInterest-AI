@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 const domainMapping = {
@@ -11,8 +11,6 @@ const domainMapping = {
   "Game Development": 7
 };
 
-const domainOptions = Object.keys(domainMapping); // Dropdown options
-
 const PredictionForm = () => {
   const [formData, setFormData] = useState({
     "Operating System": 0,
@@ -21,38 +19,44 @@ const PredictionForm = () => {
     "Backend": 0,
     "Machine Learning": 0,
     "Data Analytics": 0,
-    "Project 1": "Robotics",
-    "Project 2": "Web Development",
-    "Project 3": "Robotics",
-    "Project 4": "Cybersecurity",
+    "Project 1": "",
+    "Project 2": "",
+    "Project 3": "",
+    "Project 4": "",
   });
 
   const [prediction, setPrediction] = useState(null);
+  const [domains, setDomains] = useState([]);
+
+  useEffect(() => {
+    axios.get("http://127.0.0.1:5000/roadmaps")
+      .then((response) => {
+        setDomains(Object.keys(response.data));
+      })
+      .catch((error) => console.error("Error fetching roadmaps:", error));
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-
-    // Convert marks to numbers, but store project names as strings
-    setFormData({
-      ...formData,
-      [name]: name.startsWith("Project") ? value : Number(value),
-    });
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Convert project names to numbers before sending the request
-    const processedData = {
+    const transformedData = {
       ...formData,
-      "Project 1": domainMapping[formData["Project 1"]],
-      "Project 2": domainMapping[formData["Project 2"]],
-      "Project 3": domainMapping[formData["Project 3"]],
-      "Project 4": domainMapping[formData["Project 4"]],
+      "Project 1": domainMapping[formData["Project 1"]] || 0,
+      "Project 2": domainMapping[formData["Project 2"]] || 0,
+      "Project 3": domainMapping[formData["Project 3"]] || 0,
+      "Project 4": domainMapping[formData["Project 4"]] || 0,
     };
 
     try {
-      const response = await axios.post("http://127.0.0.1:5000/predict", processedData);
+      const response = await axios.post("http://127.0.0.1:5000/predict", transformedData);
       setPrediction(response.data);
     } catch (error) {
       console.error("Error:", error);
@@ -63,30 +67,25 @@ const PredictionForm = () => {
     <div>
       <h2>Enter Marks & Projects</h2>
       <form onSubmit={handleSubmit}>
-        {Object.keys(formData).map((key) => (
-          <div key={key}>
-            <label>{key}:</label>
-            {key.startsWith("Project") ? (
-              // Dropdown for project selection
-              <select name={key} value={formData[key]} onChange={handleChange} required>
-                {domainOptions.map((domain) => (
-                  <option key={domain} value={domain}>
-                    {domain}
-                  </option>
-                ))}
-              </select>
-            ) : (
-              // Numeric input for marks
-              <input
-                type="number"
-                name={key}
-                value={formData[key]}
-                onChange={handleChange}
-                required
-              />
-            )}
+        {["Operating System", "DSA", "Frontend", "Backend", "Machine Learning", "Data Analytics"].map((subject) => (
+          <div key={subject}>
+            <label>{subject}:</label>
+            <input type="number" name={subject} value={formData[subject]} onChange={handleChange} required />
           </div>
         ))}
+
+        {["Project 1", "Project 2", "Project 3", "Project 4"].map((project, index) => (
+          <div key={index}>
+            <label>{project}:</label>
+            <select name={project} value={formData[project]} onChange={handleChange} required>
+              <option value="">Select Domain</option>
+              {domains.map((domain, idx) => (
+                <option key={idx} value={domain}>{domain}</option>
+              ))}
+            </select>
+          </div>
+        ))}
+
         <button type="submit">Predict Interest</button>
       </form>
 
@@ -94,14 +93,27 @@ const PredictionForm = () => {
         <div>
           <h3>Predicted Interest: {prediction.predicted_interest}</h3>
           <p>{prediction.roadmap.description}</p>
-          <h4>Resources:</h4>
-          <ul>
-            {prediction.roadmap.resources.map((resource, index) => (
-              <li key={index}>
-                <a href={resource.link} target="_blank" rel="noopener noreferrer">{resource.name}</a>
-              </li>
-            ))}
-          </ul>
+
+          {/* Displaying All Roadmap Levels */}
+          {prediction.roadmap.levels && Object.entries(prediction.roadmap.levels).map(([level, details]) => (
+            <div key={level}>
+              <h4>{level}</h4>
+              <p><strong>Topics:</strong> {details.topics.join(", ")}</p>
+              <p><strong>Projects:</strong> {details.projects.join(", ")}</p>
+
+              <h5>Resources:</h5>
+              <ul>
+                {details.resources.map((resource, index) => (
+                  <li key={index}>
+                    <a href={resource.link} target="_blank" rel="noopener noreferrer">
+                      {resource.name}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+              <p><strong>Time Estimate:</strong> {details.time_estimate}</p>
+            </div>
+          ))}
         </div>
       )}
     </div>
