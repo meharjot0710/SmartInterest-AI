@@ -15,8 +15,8 @@ df[subject_cols] = df[subject_cols].apply(pd.to_numeric, errors='coerce')
 subject_to_domain = {
     'Operating System': ['Cybersecurity', 'Robotics','Game Development'],
     'DSA': ['AI', 'Machine Learning','Cybersecurity','Game Development'],
-    'Frontend': ['Web Development'],
-    'Backend': ['Web Development'],
+    'Frontend': ['Web Development','Game Development'],
+    'Backend': ['Web Development','Game Development'],
     'Machine Learning': ['AI', 'Data Science', 'Machine Learning'],
     'Data Analytics': ['Data Science','Machine Learning','AI']
 }
