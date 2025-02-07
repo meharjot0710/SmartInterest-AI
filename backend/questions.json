@@ -1,0 +1,515 @@
+{
+    "Operating System": [
+      {
+        "question": "What is a process in an operating system?",
+        "options": ["A program in execution", "A memory block", "A file system", "A hardware component"],
+        "answer": "A program in execution"
+      },
+      {
+        "question": "Which of the following is a scheduling algorithm?",
+        "options": ["FIFO", "Round Robin", "LRU", "MRU"],
+        "answer": "Round Robin"
+      },
+      {
+        "question": "What does the term 'thrashing' refer to in OS?",
+        "options": ["Excessive swapping of pages", "Efficient CPU scheduling", "Deadlock occurrence", "None of the above"],
+        "answer": "Excessive swapping of pages"
+      },
+      {
+        "question": "What is the main function of a kernel?",
+        "options": ["Managing system resources", "Executing user programs", "Handling databases", "Controlling peripherals"],
+        "answer": "Managing system resources"
+      },
+      {
+        "question": "Which OS is open-source?",
+        "options": ["Windows", "MacOS", "Linux", "iOS"],
+        "answer": "Linux"
+      },
+      {
+        "question": "What is a real-time OS used for?",
+        "options": ["Gaming", "Web browsing", "Critical time-sensitive applications", "Document editing"],
+        "answer": "Critical time-sensitive applications"
+      },
+      {
+        "question": "What is the purpose of virtual memory?",
+        "options": ["Increase RAM", "Extend storage", "Run programs larger than RAM size", "Improve CPU speed"],
+        "answer": "Run programs larger than RAM size"
+      },
+      {
+        "question": "Which scheduling algorithm can cause starvation?",
+        "options": ["FIFO", "Round Robin", "SJF", "LIFO"],
+        "answer": "SJF"
+      },
+      {
+        "question": "What is the role of an interrupt in an OS?",
+        "options": ["Pause a process", "Handle external signals", "Boost CPU speed", "Optimize memory"],
+        "answer": "Handle external signals"
+      },
+      {
+        "question": "Which layer directly interacts with hardware?",
+        "options": ["Kernel", "Shell", "Application layer", "File system"],
+        "answer": "Kernel"
+      }
+    ],
+    "DSA": [
+      {
+        "question": "What is the time complexity of binary search?",
+        "options": ["O(n)", "O(log n)", "O(n log n)", "O(1)"],
+        "answer": "O(log n)"
+      },
+      {
+        "question": "Which data structure follows FIFO principle?",
+        "options": ["Stack", "Queue", "Linked List", "Graph"],
+        "answer": "Queue"
+      },
+      {
+        "question": "Which sorting algorithm has worst-case O(n^2) complexity?",
+        "options": ["Quick Sort", "Merge Sort", "Bubble Sort", "Heap Sort"],
+        "answer": "Bubble Sort"
+      },
+      {
+        "question": "What is the height of a balanced binary search tree with N nodes?",
+        "options": ["O(N)", "O(log N)", "O(N^2)", "O(1)"],
+        "answer": "O(log N)"
+      },
+      {
+        "question": "Which data structure is best for implementing LRU cache?",
+        "options": ["Queue", "Stack", "HashMap with Doubly Linked List", "Binary Tree"],
+        "answer": "HashMap with Doubly Linked List"
+      },
+      {
+        "question": "What is the worst-case time complexity of Quick Sort?",
+        "options": ["O(n log n)", "O(n^2)", "O(log n)", "O(n)"],
+        "answer": "O(n^2)"
+      },
+      {
+        "question": "What is the primary advantage of a heap over a balanced BST?",
+        "options": ["Faster insertions", "Faster search", "Less memory usage", "More readable"],
+        "answer": "Faster insertions"
+      },
+      {
+        "question": "What does the term 'graph traversal' mean?",
+        "options": ["Finding shortest path", "Searching nodes systematically", "Sorting elements", "None of the above"],
+        "answer": "Searching nodes systematically"
+      },
+      {
+        "question": "Which algorithm is used in Dijkstra’s shortest path?",
+        "options": ["BFS", "DFS", "Greedy", "Dynamic Programming"],
+        "answer": "Greedy"
+      },
+      {
+        "question": "Which data structure is best suited for implementing a priority queue?",
+        "options": ["Stack", "Heap", "Linked List", "Graph"],
+        "answer": "Heap"
+      }
+    ],
+        "Frontend": [
+          {
+            "question": "What is the difference between <div> and <span> in HTML?",
+            "options": [
+              "div is for inline elements, span is for block elements",
+              "div is a block-level element, span is an inline element",
+              "Both are the same",
+              "span is used for creating new sections"
+            ],
+            "answer": "div is a block-level element, span is an inline element"
+          },
+          {
+            "question": "How does CSS Flexbox work?",
+            "options": [
+              "It aligns items along two axes",
+              "It is only used for animations",
+              "It applies only to images",
+              "It is an alternative to media queries"
+            ],
+            "answer": "It aligns items along two axes"
+          },
+          {
+            "question": "What is the purpose of media queries in CSS?",
+            "options": [
+              "To create animations",
+              "To make websites responsive",
+              "To change colors dynamically",
+              "To optimize images"
+            ],
+            "answer": "To make websites responsive"
+          },
+          {
+            "question": "How does the box model work in CSS?",
+            "options": [
+              "It defines how elements are wrapped",
+              "It consists of margin, border, padding, and content",
+              "It is used only for positioning elements",
+              "It allows multiple background images"
+            ],
+            "answer": "It consists of margin, border, padding, and content"
+          },
+          {
+            "question": "What is the difference between `id` and `class` in CSS?",
+            "options": [
+              "id is unique, class can be used multiple times",
+              "id can be used multiple times, class is unique",
+              "Both are the same",
+              "id is used only for JavaScript"
+            ],
+            "answer": "id is unique, class can be used multiple times"
+          },
+          {
+            "question": "What are the different types of positioning in CSS?",
+            "options": [
+              "Static, Relative, Absolute, Fixed, Sticky",
+              "Left, Right, Center",
+              "Inline, Block, Flex",
+              "None of the above"
+            ],
+            "answer": "Static, Relative, Absolute, Fixed, Sticky"
+          },
+          {
+            "question": "Explain the Virtual DOM in React.",
+            "options": [
+              "A direct copy of the actual DOM",
+              "A lightweight JavaScript representation of the real DOM",
+              "A database used in React",
+              "A built-in browser feature"
+            ],
+            "answer": "A lightweight JavaScript representation of the real DOM"
+          },
+          {
+            "question": "What is the difference between `props` and `state` in React?",
+            "options": [
+              "Props are immutable, state is mutable",
+              "Props are mutable, state is immutable",
+              "Both are the same",
+              "Only class components can use props"
+            ],
+            "answer": "Props are immutable, state is mutable"
+          },
+          {
+            "question": "What is the purpose of React hooks?",
+            "options": [
+              "To use state and lifecycle features in function components",
+              "To replace Redux",
+              "To write CSS in JavaScript",
+              "To fetch data from APIs"
+            ],
+            "answer": "To use state and lifecycle features in function components"
+          },
+          {
+            "question": "What is the significance of the `useEffect` hook?",
+            "options": [
+              "To perform side effects in functional components",
+              "To replace state management",
+              "To define global variables",
+              "To manage component styling"
+            ],
+            "answer": "To perform side effects in functional components"
+          }
+        ],
+        "Backend": [
+          {
+            "question": "What is the purpose of an API in backend development?",
+            "options": [
+              "To design the frontend",
+              "To enable communication between different software applications",
+              "To store images",
+              "To create animations"
+            ],
+            "answer": "To enable communication between different software applications"
+          },
+          {
+            "question": "Which HTTP method is used to update an existing resource?",
+            "options": [
+              "GET",
+              "POST",
+              "PUT",
+              "DELETE"
+            ],
+            "answer": "PUT"
+          },
+          {
+            "question": "What is the difference between SQL and NoSQL databases?",
+            "options": [
+              "SQL is relational, NoSQL is non-relational",
+              "NoSQL uses tables, SQL does not",
+              "SQL is used only for large-scale applications",
+              "NoSQL is always faster than SQL"
+            ],
+            "answer": "SQL is relational, NoSQL is non-relational"
+          },
+          {
+            "question": "What does REST stand for in web services?",
+            "options": [
+              "Representational State Transfer",
+              "Remote Server Testing",
+              "Real-time Event Streaming",
+              "Resource Exchange Standard Transmission"
+            ],
+            "answer": "Representational State Transfer"
+          },
+          {
+            "question": "What is the purpose of middleware in Express.js?",
+            "options": [
+              "To handle HTTP requests and responses",
+              "To execute functions before reaching route handlers",
+              "To store data permanently",
+              "To create frontend components"
+            ],
+            "answer": "To execute functions before reaching route handlers"
+          },
+          {
+            "question": "What is JWT (JSON Web Token) used for?",
+            "options": [
+              "User authentication and secure data exchange",
+              "Storing large files",
+              "Encrypting JavaScript code",
+              "Managing database connections"
+            ],
+            "answer": "User authentication and secure data exchange"
+          },
+          {
+            "question": "What is the difference between synchronous and asynchronous programming?",
+            "options": [
+              "Synchronous executes code line by line, asynchronous does not wait for tasks to complete",
+              "Asynchronous code is always faster",
+              "Synchronous is used in backend only",
+              "Asynchronous programming is only used in JavaScript"
+            ],
+            "answer": "Synchronous executes code line by line, asynchronous does not wait for tasks to complete"
+          },
+          {
+            "question": "What is the role of a database index?",
+            "options": [
+              "To speed up query performance",
+              "To store images",
+              "To increase database size",
+              "To restrict users from accessing certain tables"
+            ],
+            "answer": "To speed up query performance"
+          },
+          {
+            "question": "What is an ORM (Object-Relational Mapping)?",
+            "options": [
+              "A technique to interact with databases using objects",
+              "A programming language",
+              "A new database system",
+              "A JavaScript framework"
+            ],
+            "answer": "A technique to interact with databases using objects"
+          },
+          {
+            "question": "Which protocol is commonly used for real-time communication in backend applications?",
+            "options": [
+              "HTTP",
+              "WebSockets",
+              "FTP",
+              "SMTP"
+            ],
+            "answer": "WebSockets"
+          }
+        ],
+            "Machine Learning": [
+              {
+                "question": "What is supervised learning?",
+                "options": [
+                  "Learning without labeled data",
+                  "Learning with labeled data",
+                  "Learning through reinforcement",
+                  "Learning using genetic algorithms"
+                ],
+                "answer": "Learning with labeled data"
+              },
+              {
+                "question": "Which of the following is a type of unsupervised learning?",
+                "options": [
+                  "Regression",
+                  "Decision Trees",
+                  "Clustering",
+                  "Neural Networks"
+                ],
+                "answer": "Clustering"
+              },
+              {
+                "question": "What is the purpose of the activation function in a neural network?",
+                "options": [
+                  "To initialize weights",
+                  "To transform input signals non-linearly",
+                  "To store training data",
+                  "To reduce overfitting"
+                ],
+                "answer": "To transform input signals non-linearly"
+              },
+              {
+                "question": "Which algorithm is best suited for classification problems?",
+                "options": [
+                  "Linear Regression",
+                  "K-Means Clustering",
+                  "Support Vector Machine",
+                  "Apriori Algorithm"
+                ],
+                "answer": "Support Vector Machine"
+              },
+              {
+                "question": "What is overfitting in machine learning?",
+                "options": [
+                  "When the model performs well on training data but poorly on test data",
+                  "When the model performs well on test data but poorly on training data",
+                  "When the model ignores training data",
+                  "When the model performs well on all datasets"
+                ],
+                "answer": "When the model performs well on training data but poorly on test data"
+              },
+              {
+                "question": "What is gradient descent used for in ML?",
+                "options": [
+                  "To measure accuracy",
+                  "To minimize the loss function",
+                  "To visualize data",
+                  "To split the dataset"
+                ],
+                "answer": "To minimize the loss function"
+              },
+              {
+                "question": "Which evaluation metric is commonly used for classification models?",
+                "options": [
+                  "Mean Squared Error",
+                  "R-squared",
+                  "F1 Score",
+                  "Silhouette Score"
+                ],
+                "answer": "F1 Score"
+              },
+              {
+                "question": "What is the role of feature scaling in ML?",
+                "options": [
+                  "To change feature values to the same scale",
+                  "To remove missing values",
+                  "To increase model complexity",
+                  "To eliminate categorical features"
+                ],
+                "answer": "To change feature values to the same scale"
+              },
+              {
+                "question": "What is the main difference between bagging and boosting?",
+                "options": [
+                  "Bagging reduces variance, boosting reduces bias",
+                  "Bagging is sequential, boosting is parallel",
+                  "Both are identical techniques",
+                  "Bagging increases bias"
+                ],
+                "answer": "Bagging reduces variance, boosting reduces bias"
+              },
+              {
+                "question": "Which technique is used to reduce the number of input variables in ML?",
+                "options": [
+                  "Feature Selection",
+                  "Regularization",
+                  "Hyperparameter Tuning",
+                  "Data Augmentation"
+                ],
+                "answer": "Feature Selection"
+              }
+            ],
+            "Data Analytics": [
+              {
+                "question": "What is data cleaning?",
+                "options": [
+                  "Removing duplicate and incorrect data",
+                  "Generating new datasets",
+                  "Adding new features",
+                  "Increasing data complexity"
+                ],
+                "answer": "Removing duplicate and incorrect data"
+              },
+              {
+                "question": "What is the difference between structured and unstructured data?",
+                "options": [
+                  "Structured data is organized in tables, unstructured data lacks a predefined format",
+                  "Unstructured data is always numerical",
+                  "Structured data is always large in volume",
+                  "Unstructured data is only used for machine learning"
+                ],
+                "answer": "Structured data is organized in tables, unstructured data lacks a predefined format"
+              },
+              {
+                "question": "Which tool is commonly used for data visualization?",
+                "options": [
+                  "TensorFlow",
+                  "Matplotlib",
+                  "Keras",
+                  "Hadoop"
+                ],
+                "answer": "Matplotlib"
+              },
+              {
+                "question": "What does ETL stand for in data analytics?",
+                "options": [
+                  "Extract, Transform, Load",
+                  "Encode, Translate, Log",
+                  "Estimate, Test, Learn",
+                  "Evaluate, Train, Load"
+                ],
+                "answer": "Extract, Transform, Load"
+              },
+              {
+                "question": "What is the purpose of data normalization?",
+                "options": [
+                  "To standardize the range of values in the dataset",
+                  "To delete missing data",
+                  "To combine different datasets",
+                  "To increase dataset size"
+                ],
+                "answer": "To standardize the range of values in the dataset"
+              },
+              {
+                "question": "What is the difference between correlation and causation?",
+                "options": [
+                  "Correlation shows a relationship, causation shows direct influence",
+                  "Causation always implies correlation",
+                  "Correlation is used only in machine learning",
+                  "There is no difference"
+                ],
+                "answer": "Correlation shows a relationship, causation shows direct influence"
+              },
+              {
+                "question": "What is an outlier in data analytics?",
+                "options": [
+                  "A data point that deviates significantly from other observations",
+                  "A common data value",
+                  "A missing data entry",
+                  "A dataset with only numerical values"
+                ],
+                "answer": "A data point that deviates significantly from other observations"
+              },
+              {
+                "question": "Which technique is used for dimensionality reduction?",
+                "options": [
+                  "Principal Component Analysis (PCA)",
+                  "Data Augmentation",
+                  "Bagging",
+                  "Data Scraping"
+                ],
+                "answer": "Principal Component Analysis (PCA)"
+              },
+              {
+                "question": "What is a key characteristic of big data?",
+                "options": [
+                  "Volume, Velocity, Variety",
+                  "Only large datasets",
+                  "Data stored in Excel sheets",
+                  "Data with missing values"
+                ],
+                "answer": "Volume, Velocity, Variety"
+              },
+              {
+                "question": "Which SQL clause is used to filter data?",
+                "options": [
+                  "ORDER BY",
+                  "WHERE",
+                  "GROUP BY",
+                  "HAVING"
+                ],
+                "answer": "WHERE"
+              }
+            ]
+          }
+          
