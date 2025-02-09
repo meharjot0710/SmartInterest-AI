@@ -51,6 +51,32 @@ def predict_interest():
         "roadmap": roadmap_info  # ✅ Now includes all levels
     })
 
+# Load questions from JSON file
+with open("questions.json", "r") as f:
+    questions_data = json.load(f)
+
+@app.route("/get_questions", methods=["GET"])
+def get_questions():
+    subject = request.args.get("subject")
+    if subject in questions_data:
+        return jsonify({"questions": questions_data[subject]})
+    else:
+        return jsonify({"error": "Subject not found"}), 404
+
+@app.route("/submit_answers", methods=["POST"])
+def submit_answers():
+    data = request.get_json()
+    subject = data.get("subject")
+    answers = data.get("answers")  # List of user's selected answers
+    
+    if subject not in questions_data:
+        return jsonify({"error": "Invalid subject"}), 400
+
+    correct_answers = [q["answer"] for q in questions_data[subject]]
+    score = sum(1 for user_ans, correct_ans in zip(answers, correct_answers) if user_ans == correct_ans)
+    
+    return jsonify({"score": score, "total": len(correct_answers)})
+
 @app.route("/roadmaps", methods=["GET"])
 def get_roadmaps():
     """Fetch all available roadmaps."""
