@@ -15,7 +15,7 @@ const TestInterface = () => {
 
   const fetchQuestions = async () => {
     const subject = subjects[currentSubjectIndex];
-    const res = await fetch(`http://localhost:5000/get_questions?subject=${subject}`);
+    const res = await fetch(`https://smartinterest-ai.onrender.com?subject=${subject}`);
     const data = await res.json();
     setQuestions(data.questions);
     setAnswers({});
@@ -27,7 +27,7 @@ const TestInterface = () => {
 
   const handleSubmit = async () => {
     const subject = subjects[currentSubjectIndex];
-    const res = await fetch("http://localhost:5000/submit_answers", {
+    const res = await fetch("https://smartinterest-ai.onrender.com/submit_answers", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ subject, answers: Object.values(answers) }),

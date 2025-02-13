@@ -29,7 +29,7 @@ const PredictionForm = () => {
   const [domains, setDomains] = useState([]);
 
   useEffect(() => {
-    axios.get("http://127.0.0.1:5000/roadmaps")
+    axios.get("https://smartinterest-ai.onrender.com/roadmaps")
       .then((response) => {
         setDomains(Object.keys(response.data));
       })
@@ -56,7 +56,7 @@ const PredictionForm = () => {
     };
 
     try {
-      const response = await axios.post("http://127.0.0.1:5000/predict", transformedData);
+      const response = await axios.post("https://smartinterest-ai.onrender.com/predict", transformedData);
       setPrediction(response.data);
     } catch (error) {
       console.error("Error:", error);
