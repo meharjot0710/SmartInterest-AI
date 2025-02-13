@@ -13,7 +13,7 @@ const TestInterface = () => {
 
   const fetchQuestions = async () => {
     const subject = subjects[currentSubjectIndex];
-    const res = await fetch(`http://localhost:5000/get_questions?subject=${subject}`);
+    const res = await fetch(`https://smartinterest-ai.onrender.com/get_questions?subject=${subject}`);
     const data = await res.json();
     setQuestions(data.questions);
     setAnswers({}); // ✅ Clear selected answers when switching subjects

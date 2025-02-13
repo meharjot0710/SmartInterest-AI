@@ -14,12 +14,18 @@ const TestInterface = () => {
   }, [currentSubjectIndex]);
 
   const fetchQuestions = async () => {
-    const subject = subjects[currentSubjectIndex];
-    const res = await fetch(`https://smartinterest-ai.onrender.com?subject=${subject}`);
-    const data = await res.json();
-    setQuestions(data.questions);
-    setAnswers({});
+    try {
+      const subject = subjects[currentSubjectIndex];
+      const res = await fetch(`https://smartinterest-ai.onrender.com/get_questions?subject=${subject}`);
+      if (!res.ok) throw new Error("Failed to fetch questions");
+      const data = await res.json();
+      setQuestions(data.questions);
+      setAnswers({});
+    } catch (error) {
+      console.error("Error fetching questions:", error);
+    }
   };
+  
 
   const handleAnswerChange = (qIndex, answer) => {
     setAnswers((prev) => ({ ...prev, [qIndex]: answer }));
@@ -33,19 +39,19 @@ const TestInterface = () => {
       body: JSON.stringify({ subject, answers: Object.values(answers) }),
     });
     const data = await res.json();
-
-    setScores((prev) => ({
-      ...prev,
-      [subject]: data.score,
-    }));
-
+  
+    // ✅ Ensure we update scores correctly
+    const updatedScores = { ...scores, [subject]: data.score };
+    setScores(updatedScores);
+  
     if (currentSubjectIndex < subjects.length - 1) {
       setCurrentSubjectIndex(currentSubjectIndex + 1);
     } else {
-      // ✅ Navigate to score page when test is completed
-      navigate("/scores", { state: { scores } });
+      // ✅ Pass updatedScores directly to ensure correct data is sent
+      navigate("/scores", { state: { scores: updatedScores } });
     }
   };
+  
 
   return (
     <div className="p-4 max-w-xl mx-auto">
