@@ -3,9 +3,10 @@ from flask_cors import CORS
 import joblib
 import os
 import json
+import random
 
 app = Flask(__name__)
-CORS(app)  # ✅ Enable CORS
+CORS(app)
 
 # Load model and encoders
 model_path = os.path.join("model", "smartinterest_model.pkl")
@@ -48,7 +49,7 @@ def predict_interest():
 
     return jsonify({
         "predicted_interest": interest_label,
-        "roadmap": roadmap_info  # ✅ Now includes all levels
+        "roadmap": roadmap_info
     })
 
 # Load questions from JSON file
@@ -59,7 +60,9 @@ with open("questions.json", "r") as f:
 def get_questions():
     subject = request.args.get("subject")
     if subject in questions_data:
-        return jsonify({"questions": questions_data[subject]})
+        questions = questions_data[subject]
+        random.shuffle(questions)  # Randomize question order
+        return jsonify({"questions": questions})
     else:
         return jsonify({"error": "Subject not found"}), 404
 
@@ -67,15 +70,23 @@ def get_questions():
 def submit_answers():
     data = request.get_json()
     subject = data.get("subject")
-    answers = data.get("answers")  # List of user's selected answers
+    user_answers = data.get("answers")  # List of user's selected answers
     
     if subject not in questions_data:
         return jsonify({"error": "Invalid subject"}), 400
 
-    correct_answers = [q["answer"] for q in questions_data[subject]]
-    score = sum(1 for user_ans, correct_ans in zip(answers, correct_answers) if user_ans == correct_ans)
-    
-    return jsonify({"score": score, "total": len(correct_answers)})
+    questions = questions_data[subject]
+    correct_answers = {idx: q["answer"] for idx, q in enumerate(questions)}  # Ensure correct index mapping
+
+    score = sum(1 for idx, ans in enumerate(user_answers) if correct_answers.get(idx) == ans)
+    total_questions = len(questions)
+    percentage = (score / total_questions) * 100 if total_questions else 0
+
+    return jsonify({
+        "score": score,
+        "total": total_questions,
+        "percentage": round(percentage, 2)
+    })
 
 @app.route("/roadmaps", methods=["GET"])
 def get_roadmaps():

@@ -1,13 +1,20 @@
 import React from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import ScorePage from "./Score";
 import PredictionForm from "./PredictionForm";
+import TestInterface from "./TestInterface";
 
-function App() {
+const App = () => {
   return (
-    <div>
-      <h1>SmartInterest AI</h1>
-      <PredictionForm />
-    </div>
+    <Router>
+      <Routes>
+      <Route path="/" element={<TestInterface/>} />
+      <Route path="/predict" element={<PredictionForm/>} />
+        <Route path="/scores" element={<ScorePage/>} />
+      </Routes>
+    </Router>
   );
-}
+};
 
 export default App;
+

@@ -1,0 +1,47 @@
+
+🚀 SmartInterest AI - Revised Plan & Deadlines
+
+
+🟢 Phase 1 - Interest Prediction System (✅ Completed)
+🔹 Features Implemented:
+✔️ Users input marks and projects
+✔️ Model predicts interest
+✔️ Provides a roadmap with resources
+
+📅 Deadline: Completed ✅
+
+🟡 Phase 2 - Full Test-Based System (⏳ Ongoing - Deadline Extended: 20th Feb)
+🔹 Features:
+✅ Users take a test for all subjects (Done)
+✅ Scores are stored and displayed on a new page (Done)
+🔲 Personalized Dashboards (New Addition)
+🔲 Login/Signup (Firebase Authentication) (New Addition)
+🔲 User Data Storage (MongoDB Atlas) (New Addition)
+
+📅 New Deadline: 20th Feb (since we added login + dashboards)
+
+🟠 Phase 3 - AI-Driven Personalized Roadmaps (Feb 21 - Feb 28)
+🔹 Features:
+✅ Users choose subjects for testing (instead of full test)
+✅ Projects can be added manually OR via report analysis
+🔲 NLP-based project report analysis (Extract features from report)
+🔲 Integrated project idea generator (new feature)
+🔲 Personalized dashboards track progress
+
+📅 Deadline: 28th Feb (to ensure testing & optimization)
+
+🔴 Phase 4 - Final Deployment & Scaling (March 1 - March 10)
+🔹 Features:
+🔲 Complete UI/UX Refinement
+🔲 Mobile-Friendly Design
+🔲 Final Database Optimization
+🔲 Deploy on Production (Render/Cloud Provider)
+🔲 Bug Fixes & Performance Enhancements
+
+📅 Deadline: March 10th
+
+⚡ Final Timeline Overview
+✅ Phase 1 - Completed
+⏳ Phase 2 - Until 20th Feb
+🚀 Phase 3 - Until 28th Feb
+🌍 Phase 4 - Until 10th March
