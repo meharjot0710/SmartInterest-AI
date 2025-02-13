@@ -3,3 +3,4 @@ flask-cors
 joblib
 numpy
 scikit-learn
+xgboost
