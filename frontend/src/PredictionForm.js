@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const domainMapping = {
   "AI": 1,
@@ -10,15 +11,19 @@ const domainMapping = {
   "Robotics": 6,
   "Game Development": 7
 };
-
+const levelOrder = ["Beginner", "Intermediate", "Advanced"];
 const PredictionForm = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const scores = location.state?.scores || {};
+
   const [formData, setFormData] = useState({
-    "Operating System": 0,
-    "DSA": 0,
-    "Frontend": 0,
-    "Backend": 0,
-    "Machine Learning": 0,
-    "Data Analytics": 0,
+    "Operating System": scores["Operating System"]*10,
+    "DSA": scores["DSA"]*10,
+    "Frontend": scores["Frontend"]*10,
+    "Backend": scores["Backend"]*10,
+    "Machine Learning": scores["Machine Learning"]*10,
+    "Data Analytics": scores["Data Analytics"]*10,
     "Project 1": "",
     "Project 2": "",
     "Project 3": "",
@@ -29,7 +34,8 @@ const PredictionForm = () => {
   const [domains, setDomains] = useState([]);
 
   useEffect(() => {
-    axios.get("https://smartinterest-ai.onrender.com/roadmaps")
+    console.log(scores)
+    axios.get("http://127.0.0.1:5000/roadmaps")
       .then((response) => {
         setDomains(Object.keys(response.data));
       })
@@ -43,7 +49,7 @@ const PredictionForm = () => {
       [name]: value,
     }));
   };
-
+  const levelOrder = ["Beginner", "Intermediate", "Advanced"];
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -56,7 +62,7 @@ const PredictionForm = () => {
     };
 
     try {
-      const response = await axios.post("https://smartinterest-ai.onrender.com/predict", transformedData);
+      const response = await axios.post("http://127.0.0.1:5000/predict", transformedData);
       setPrediction(response.data);
     } catch (error) {
       console.error("Error:", error);
@@ -70,7 +76,7 @@ const PredictionForm = () => {
         {["Operating System", "DSA", "Frontend", "Backend", "Machine Learning", "Data Analytics"].map((subject) => (
           <div key={subject}>
             <label>{subject}:</label>
-            <input type="number" name={subject} value={formData[subject]} onChange={handleChange} required />
+            <div>{formData[subject]}</div>
           </div>
         ))}
 
@@ -92,28 +98,33 @@ const PredictionForm = () => {
       {prediction && (
         <div>
           <h3>Predicted Interest: {prediction.predicted_interest}</h3>
-          <p>{prediction.roadmap.description}</p>
+          <p>{prediction.roadmap.prerequisites}</p>
 
           {/* Displaying All Roadmap Levels */}
-          {prediction.roadmap.levels && Object.entries(prediction.roadmap.levels).map(([level, details]) => (
-            <div key={level}>
-              <h4>{level}</h4>
-              <p><strong>Topics:</strong> {details.topics.join(", ")}</p>
-              <p><strong>Projects:</strong> {details.projects.join(", ")}</p>
+          {prediction.roadmap.levels &&
+  levelOrder.map((level) => {
+    const details = prediction.roadmap.levels[level];
+    return details ? (
+      <div key={level}>
+        <h4>{level}</h4>
+        <p><strong>Topics:</strong> {details.topics.join(", ")}</p>
+        <p><strong>Projects:</strong> {details.projects.join(", ")}</p>
 
-              <h5>Resources:</h5>
-              <ul>
-                {details.resources.map((resource, index) => (
-                  <li key={index}>
-                    <a href={resource.link} target="_blank" rel="noopener noreferrer">
-                      {resource.name}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-              <p><strong>Time Estimate:</strong> {details.time_estimate}</p>
-            </div>
+        <h5>Resources:</h5>
+        <ul>
+          {details.resources.map((resource, index) => (
+            <li key={index}>
+              <a href={resource.link} target="_blank" rel="noopener noreferrer">
+                {resource.name}
+              </a>
+            </li>
           ))}
+        </ul>
+        <p><strong>Time Estimate:</strong> {details.time_estimate}</p>
+      </div>
+    ) : null;
+  })
+}
         </div>
       )}
     </div>

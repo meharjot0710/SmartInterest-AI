@@ -16,7 +16,7 @@ const TestInterface = () => {
   const fetchQuestions = async () => {
     try {
       const subject = subjects[currentSubjectIndex];
-      const res = await fetch(`https://smartinterest-ai.onrender.com/get_questions?subject=${subject}`);
+      const res = await fetch(`http://127.0.0.1:5000/get_questions?subject=${subject}`);
       if (!res.ok) throw new Error("Failed to fetch questions");
       const data = await res.json();
       setQuestions(data.questions);
@@ -33,7 +33,7 @@ const TestInterface = () => {
 
   const handleSubmit = async () => {
     const subject = subjects[currentSubjectIndex];
-    const res = await fetch("https://smartinterest-ai.onrender.com/submit_answers", {
+    const res = await fetch("http://127.0.0.1:5000/submit_answers", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ subject, answers: Object.values(answers) }),
@@ -48,7 +48,7 @@ const TestInterface = () => {
       setCurrentSubjectIndex(currentSubjectIndex + 1);
     } else {
       // ✅ Pass updatedScores directly to ensure correct data is sent
-      navigate("/scores", { state: { scores: updatedScores } });
+      navigate("/predict", { state: { scores: updatedScores } });
     }
   };
   

@@ -1,0 +1,1 @@
+mongodb+srv://meharjot03:<db_password>@smartinterest-ai.wbrqs.mongodb.net/?retryWrites=true&w=majority&appName=SmartInterest-AI
