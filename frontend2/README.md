@@ -1,0 +1,3 @@
+# SmartInterst AI
+
+NextAI Hack
