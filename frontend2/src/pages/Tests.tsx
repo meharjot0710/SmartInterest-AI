@@ -1,118 +1,88 @@
-
-import Navbar from "@/components/Navbar";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Calendar } from "@/components/ui/calendar";
-import { CheckCircle, Clock, FileText, TrendingUp } from "lucide-react";
-import { useState } from "react";
-
-const tests = [
-  {
-    id: 1,
-    title: "Mathematics Mid-Term",
-    date: "March 15, 2024",
-    duration: "2 hours",
-    status: "Upcoming"
-  },
-  {
-    id: 2,
-    title: "Physics Assessment",
-    date: "March 20, 2024",
-    duration: "1.5 hours",
-    status: "Upcoming"
-  },
-  {
-    id: 3,
-    title: "Chemistry Quiz",
-    date: "March 10, 2024",
-    duration: "45 minutes",
-    status: "Completed"
-  }
-];
-
-const progressData = [
-  { subject: "Mathematics", score: 85, improvement: "+5%" },
-  { subject: "Physics", score: 78, improvement: "+3%" },
-  { subject: "Chemistry", score: 92, improvement: "+7%" }
-];
+import React, { useState, useEffect } from "react"; 
+import { useNavigate } from "react-router-dom";
 
 const Tests = () => {
-  const [date, setDate] = useState<Date | undefined>(new Date());
+  const subjects = ["Operating System", "DSA", "Frontend", "Backend", "Machine Learning", "Data Analytics"];
+  const [currentSubjectIndex, setCurrentSubjectIndex] = useState(0);
+  const [questions, setQuestions] = useState([]);
+  const [answers, setAnswers] = useState({});
+  const [scores, setScores] = useState({});
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    fetchQuestions();
+  }, [currentSubjectIndex]);
+
+  const fetchQuestions = async () => {
+    try {
+      const subject = subjects[currentSubjectIndex];
+      const res = await fetch(`http://127.0.0.1:5000/get_questions?subject=${subject}`);
+      if (!res.ok) throw new Error("Failed to fetch questions");
+      const data = await res.json();
+      setQuestions(data.questions);
+      setAnswers({});
+    } catch (error) {
+      console.error("Error fetching questions:", error);
+    }
+  };
+  
+
+  const handleAnswerChange = (qIndex, answer) => {
+    setAnswers((prev) => ({ ...prev, [qIndex]: answer }));
+  };
+
+  const handleSubmit = async () => {
+    const subject = subjects[currentSubjectIndex];
+    const res = await fetch("http://127.0.0.1:5000/submit_answers", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ subject, answers: Object.values(answers) }),
+    });
+    const data = await res.json();
+  
+    // ✅ Ensure we update scores correctly
+    const updatedScores = { ...scores, [subject]: data.score };
+    setScores(updatedScores);
+  
+    if (currentSubjectIndex < subjects.length - 1) {
+      setCurrentSubjectIndex(currentSubjectIndex + 1);
+    } else {
+      // ✅ Pass updatedScores directly to ensure correct data is sent
+      navigate("/predict", { state: { scores: updatedScores } });
+    }
+  };
+  
 
   return (
-    <div className="min-h-screen bg-background">
-      <Navbar />
-      <div className="container mx-auto px-4 pt-24">
-        <h1 className="text-3xl font-bold mb-8">AI Predictions & Roadmap</h1>
-        
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Calendar Section */}
-          <Card className="glass-card lg:col-span-1">
-            <CardHeader>
-              <CardTitle>Test Calendar</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <Calendar
-                mode="single"
-                selected={date}
-                onSelect={setDate}
-                className="rounded-md"
+    <div className="p-4 max-w-xl mx-auto">
+      <h2 className="text-xl font-bold">{subjects[currentSubjectIndex]} Test</h2>
+      {questions.map((q, index) => (
+        <div key={index} className="p-4 my-2">
+          <p>{q.question}</p>
+          {q.options.map((opt, optIndex) => (
+            <label key={optIndex} className="block">
+              <input
+                type="radio"
+                name={`q${index}`}
+                value={opt}
+                checked={answers[index] === opt}
+                onChange={() => handleAnswerChange(index, opt)}
               />
-            </CardContent>
-          </Card>
-
-          {/* Progress Tracking Section */}
-          <Card className="glass-card lg:col-span-2">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <TrendingUp className="h-5 w-5 text-primary" />
-                Performance Progress
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-6">
-                {progressData.map((subject, index) => (
-                  <div key={index} className="space-y-2">
-                    <div className="flex justify-between items-center">
-                      <span className="font-medium">{subject.subject}</span>
-                      <span className="text-sm text-primary">{subject.improvement}</span>
-                    </div>
-                    <div className="h-2 bg-accent/10 rounded-full">
-                      <div 
-                        className="h-full bg-primary rounded-full transition-all duration-500"
-                        style={{ width: `${subject.score}%` }}
-                      />
-                    </div>
-                    <span className="text-sm text-muted-foreground">Score: {subject.score}%</span>
-                  </div>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-
-        <h2 className="text-2xl font-bold mt-12 mb-8">Upcoming Tests</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {tests.map((test) => (
-            <Card key={test.id} className="glass-card hover:scale-105 transition-transform duration-300">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <FileText className="h-5 w-5 text-primary" />
-                  {test.title}
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="flex items-center gap-2 text-muted-foreground">
-                  <Clock className="h-4 w-4" />
-                  <span>{test.date} • {test.duration}</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle className="h-4 w-4 text-primary" />
-                  <span>{test.status}</span>
-                </div>
-              </CardContent>
-            </Card>
+              {opt}
+            </label>
           ))}
         </div>
+      ))}
+
+      <div className="flex justify-between mt-4">
+        {currentSubjectIndex > 0 && (
+          <button onClick={() => setCurrentSubjectIndex(currentSubjectIndex - 1)}>Previous</button>
+        )}
+        {currentSubjectIndex < subjects.length - 1 ? (
+          <button onClick={handleSubmit}>Next</button>
+        ) : (
+          <button onClick={handleSubmit}>Finish Test</button>
+        )}
       </div>
     </div>
   );

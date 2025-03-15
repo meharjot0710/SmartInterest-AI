@@ -28,6 +28,7 @@ const Login = () => {
 
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      await storeUserInDB(userCredential.user);
       alert("Login Successful! Redirecting to dashboard...");
       setTimeout(() => navigate("/dashboard"), 1500);
     } catch (error) {
@@ -49,6 +50,7 @@ const Login = () => {
   const loginWithGoogle = async () => {
     try {
       const result = await signInWithPopup(auth, googleProvider);
+      console.log(result)
       await storeUserInDB(result.user);
       alert("Google Login Successful! Redirecting to dashboard...");
       setTimeout(() => navigate("/dashboard"), 1500);

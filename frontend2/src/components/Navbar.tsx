@@ -26,18 +26,6 @@ const Navbar = () => {
             >
               Features
             </a>
-            <Link
-              to="/tests"
-              className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-            >
-              Tests
-            </Link>
-            <Link
-              to="/predictions"
-              className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-            >
-              Predictions
-            </Link>
           </div>
         </div>
         <div className="flex items-center space-x-4">
