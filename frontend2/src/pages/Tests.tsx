@@ -33,21 +33,24 @@ const Tests = () => {
 
   const handleSubmit = async () => {
     const subject = subjects[currentSubjectIndex];
+  
+    // Ensure the answers are in correct order
+    const orderedAnswers = questions.map((_, index) => answers[index] || null); 
+  
     const res = await fetch("http://127.0.0.1:5000/submit_answers", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ subject, answers: Object.values(answers) }),
+      body: JSON.stringify({ subject, answers: orderedAnswers }), // Ensures correct order
     });
-    const data = await res.json();
   
-    // ✅ Ensure we update scores correctly
+    const data = await res.json();
+    
     const updatedScores = { ...scores, [subject]: data.score };
     setScores(updatedScores);
   
     if (currentSubjectIndex < subjects.length - 1) {
       setCurrentSubjectIndex(currentSubjectIndex + 1);
     } else {
-      // ✅ Pass updatedScores directly to ensure correct data is sent
       navigate("/predict", { state: { scores: updatedScores } });
     }
   };
