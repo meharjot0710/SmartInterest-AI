@@ -160,46 +160,40 @@ def submit_answers():
 @app.route("/update_user_data", methods=["POST"])
 def update_user_data():
     data = request.get_json()
-    print("Received Data:", data) 
+    # print("Received Data:", data)
     if not data:
         return jsonify({"error": "No input data provided"}), 400
-    user_id = data.get("user_id")
+    user_id = data.get("uid")
     if not user_id:
         return jsonify({"error": "User ID is required"}), 400
     user = users_collection.find_one({"uid": user_id})
     if not user:
         return jsonify({"error": "User not found"}), 404
+    
     try:
         updated_scores = user.get("scores", {})
-        for subject in ["Operating System", "DSA", "Frontend", "Backend", "Machine Learning", "Data Analytics"]:
+        subjects=["Operating System", "DSA", "Frontend", "Backend", "Machine Learning", "Data Analytics"]
+        for subject in subjects:
             if subject not in updated_scores:
                 updated_scores[subject] = []
-            updated_scores[subject].append(float(data[subject]))
+            updated_scores[subject].append(float(data['scores'][subject]*10))
+            # print(updated_scores)
             if len(updated_scores[subject]) > 3:
                 updated_scores[subject] = updated_scores[subject][-3:]
         updated_projects = [
-            data.get("Project 1", ""),
-            data.get("Project 2", ""),
-            data.get("Project 3", ""),
-            data.get("Project 4", ""),
+            data['formdata']["Project 1"],
+            data['formdata']["Project 2"],
+            data['formdata']["Project 3"],
+            data['formdata']["Project 4"],
         ]
         updated_projects = [p for p in updated_projects if p]
-        input_data = np.array([
-            float(data["Operating System"]),
-            float(data["DSA"]),
-            float(data["Frontend"]),
-            float(data["Backend"]),
-            float(data["Machine Learning"]),
-            float(data["Data Analytics"]),
-            int(data["Project 1"]) if data["Project 1"] else 0,
-            int(data["Project 2"]) if data["Project 2"] else 0,
-            int(data["Project 3"]) if data["Project 3"] else 0,
-            int(data["Project 4"]) if data["Project 4"] else 0,
-        ]).reshape(1, -1)
-        prediction = model.predict(input_data)[0]
-        interest_label = label_encoder.inverse_transform([prediction])[0]
+        interest_label = data['predicted_interest']['predicted_interest']
+        print("hh")
         updated_interests = user.get("predicted_interest", [])
         updated_interests.append(interest_label)
+        print(updated_scores)
+        print(updated_projects)
+        print(updated_interests)
         if len(updated_interests) > 2:
             updated_interests = updated_interests[-2:]
         users_collection.update_one(

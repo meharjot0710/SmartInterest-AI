@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { Button } from "@/components/ui/button";
+import { ArrowRight, Brain, ChartLine } from "lucide-react";
+import { Link } from "react-router-dom";
 
 interface UserData {
   name: string;
@@ -74,7 +77,7 @@ const Dashboard: React.FC<DashboardProps> = ({ user }) => {
       {/* Predicted Interest */}
       <Card className="mb-6">
         <CardHeader>
-          <CardTitle>Predicted Interest</CardTitle>
+          <CardTitle>Latest 2 Predicted Interest</CardTitle>
         </CardHeader>
         <CardContent>
           <p className="text-lg font-semibold">{userData.predicted_interest}</p>
@@ -95,6 +98,12 @@ const Dashboard: React.FC<DashboardProps> = ({ user }) => {
           </ul>
         </CardContent>
       </Card>
+      <Link to="/tests">
+      <Button size="lg" className="bg-primary hover:bg-primary/90">
+        Start Analysis
+      <ArrowRight className="ml-2 w-4 h-4" />
+      </Button>
+      </Link>
     </div>
   );
 };

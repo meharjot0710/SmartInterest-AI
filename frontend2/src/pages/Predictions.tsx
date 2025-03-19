@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import { ArrowLeft, Lock, Mail } from "lucide-react";
+import {  Link } from "react-router-dom";
 
 const domainMapping = {
   "AI": 1,
@@ -75,8 +78,21 @@ const PredictionForm: React.FC<PredictionProp> = ({ user })=> {
       console.error("Error:", error);
     }
     try {
-      const response = await axios.post("http://127.0.0.1:5000/update_user_data", transformedData);
-      console.log(response.data.message);
+      const storeUserInDB = async (user) => {
+        await fetch("http://localhost:5000/update_user_data", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            uid: user.uid,
+            email: user.email,
+            scores:scores,
+            predicted_interest:prediction,
+            formdata:formData
+          }),
+        });
+      };
+      
+      await storeUserInDB(user);
     } catch (error) {
       console.error("Error:", error);
     }
@@ -84,7 +100,14 @@ const PredictionForm: React.FC<PredictionProp> = ({ user })=> {
 
   return (
     <div>
-      <h2>Marks</h2>
+      <Link
+        to="/dashboard"
+        className=" top-4 left-4 flex items-center text-primary hover:underline"
+      >
+        <ArrowLeft className="h-4 w-4 mr-1" />
+        Back to Dashboard
+      </Link>
+      <h2>Score</h2>
       <form onSubmit={handleSubmit}>
         {["Operating System", "DSA", "Frontend", "Backend", "Machine Learning", "Data Analytics"].map((subject) => (
           <div key={subject}>
@@ -104,8 +127,9 @@ const PredictionForm: React.FC<PredictionProp> = ({ user })=> {
             </select>
           </div>
         ))}
-
-        <button type="submit">Predict Interest</button>
+        <Button type="submit" size="lg" className="bg-primary hover:bg-primary/90">
+          Start Analysis
+        </Button>
       </form>
 
       {prediction && (

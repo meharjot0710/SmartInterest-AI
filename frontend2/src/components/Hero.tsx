@@ -34,7 +34,7 @@ const Hero = () => {
           
           <div className="mt-16 glass-card p-6 rounded-lg grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="text-center">
-              <h3 className="text-3xl font-bold text-primary mb-2">95%</h3>
+              <h3 className="text-3xl font-bold text-primary mb-2">96%</h3>
               <p className="text-muted-foreground">Prediction Accuracy</p>
             </div>
             <div className="text-center">
