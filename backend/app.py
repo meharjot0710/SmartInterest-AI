@@ -177,7 +177,7 @@ def update_user_data():
             if subject not in updated_scores:
                 updated_scores[subject] = []
             updated_scores[subject].append(float(data['scores'][subject]*10))
-            # print(updated_scores)
+            print(updated_scores)
             if len(updated_scores[subject]) > 3:
                 updated_scores[subject] = updated_scores[subject][-3:]
         updated_projects = [
