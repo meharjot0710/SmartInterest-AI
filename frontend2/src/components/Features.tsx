@@ -2,11 +2,6 @@ import { BookOpen, Brain, ChartLine, Users } from "lucide-react";
 
 const features = [
   {
-    icon: <ChartLine className="w-6 h-6" />,
-    title: "Attendance Analytics",
-    description: "Track and analyze attendance patterns to identify engagement trends and potential issues early."
-  },
-  {
     icon: <Brain className="w-6 h-6" />,
     title: "AI-Driven Insights",
     description: "Advanced machine learning algorithms predict student interests and learning patterns."
@@ -36,7 +31,7 @@ const Features = () => {
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {features.map((feature, index) => (
             <div
               key={index}
