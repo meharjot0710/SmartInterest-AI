@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"; 
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Tests = () => {
@@ -25,7 +25,6 @@ const Tests = () => {
       console.error("Error fetching questions:", error);
     }
   };
-  
 
   const handleAnswerChange = (qIndex, answer) => {
     setAnswers((prev) => ({ ...prev, [qIndex]: answer }));
@@ -33,59 +32,67 @@ const Tests = () => {
 
   const handleSubmit = async () => {
     const subject = subjects[currentSubjectIndex];
-  
-    // Ensure the answers are in correct order
-    const orderedAnswers = questions.map((_, index) => answers[index] || null); 
-  
+    const orderedAnswers = questions.map((_, index) => answers[index] || null);
+
     const res = await fetch("http://127.0.0.1:5000/submit_answers", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ subject, answers: orderedAnswers }), // Ensures correct order
+      body: JSON.stringify({ subject, answers: orderedAnswers }),
     });
-  
+
     const data = await res.json();
-    
     const updatedScores = { ...scores, [subject]: data.score };
     setScores(updatedScores);
-  
+
     if (currentSubjectIndex < subjects.length - 1) {
       setCurrentSubjectIndex(currentSubjectIndex + 1);
     } else {
       navigate("/predict", { state: { scores: updatedScores } });
     }
   };
-  
 
   return (
-    <div className="p-4 max-w-xl mx-auto">
-      <h2 className="text-xl font-bold">{subjects[currentSubjectIndex]} Test</h2>
+    <div className="p-6 max-w-3xl mx-auto m-10 bg-[#272935] shadow-md rounded-lg">
+      <h2 className="text-4xl uppercase underline font-semibold mb-6 text-center text-white">
+        {subjects[currentSubjectIndex]} Test
+      </h2>
+
       {questions.map((q, index) => (
-        <div key={index} className="p-4 my-2">
-          <p>{q.question}</p>
-          {q.options.map((opt, optIndex) => (
-            <label key={optIndex} className="block">
-              <input
-                type="radio"
-                name={`q${index}`}
-                value={opt}
-                checked={answers[index] === opt}
-                onChange={() => handleAnswerChange(index, opt)}
-              />
-              {opt}
-            </label>
-          ))}
+        <div key={index} className="mb-6 p-4 border rounded-lg bg-[#272935] hover:bg-[#393c4e] shadow-sm">
+          <p className="font-medium text-white mb-3">{index + 1}. {q.question}</p>
+          <div className="space-y-2">
+            {q.options.map((opt, optIndex) => (
+              <label key={optIndex} className="flex items-center gap-2 text-white">
+                <input
+                  type="radio"
+                  name={`q${index}`}
+                  value={opt}
+                  checked={answers[index] === opt}
+                  onChange={() => handleAnswerChange(index, opt)}
+                  className="accent-blue-500"
+                />
+                <span>{opt}</span>
+              </label>
+            ))}
+          </div>
         </div>
       ))}
 
-      <div className="flex justify-between mt-4">
+      <div className="flex justify-between mt-8">
         {currentSubjectIndex > 0 && (
-          <button onClick={() => setCurrentSubjectIndex(currentSubjectIndex - 1)}>Previous</button>
+          <button
+            onClick={() => setCurrentSubjectIndex(currentSubjectIndex - 1)}
+            className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 rounded"
+          >
+            Previous
+          </button>
         )}
-        {currentSubjectIndex < subjects.length - 1 ? (
-          <button onClick={handleSubmit}>Next</button>
-        ) : (
-          <button onClick={handleSubmit}>Finish Test</button>
-        )}
+        <button
+          onClick={handleSubmit}
+          className="bg-white text-black font-semibold py-2 px-6 rounded ml-auto border border-transparent hover:bg-transparent hover:border-white hover:text-white transition-all duration-100"
+        >
+          {currentSubjectIndex < subjects.length - 1 ? "Next" : "Finish Test"}
+        </button>
       </div>
     </div>
   );

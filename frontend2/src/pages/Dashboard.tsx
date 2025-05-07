@@ -82,8 +82,8 @@ const Dashboard: React.FC<DashboardProps> = ({ user }) => {
   return (
     <div className="p-6">
       <div>
-      <h2 className="text-2xl font-bold mb-4">Welcome, {userData.name}</h2>
-      <Link to="/" className=" top-4 left-4 flex items-center text-primary hover:underline">
+      <h2 className="text-4xl uppercase font-bold mb-10 underline">Welcome , {userData.name}</h2>
+      <Link to="/" className=" top-7 right-7 absolute text-primary hover:underline">
         LogOut
       </Link>
       </div>
@@ -131,7 +131,7 @@ const Dashboard: React.FC<DashboardProps> = ({ user }) => {
       {/* Marks Table */}
       <Card className="mb-6">
         <CardHeader>
-          <CardTitle>Last 3 Marks</CardTitle>
+          <CardTitle>Recent Marks</CardTitle>
         </CardHeader>
         <CardContent>
           <Table>
@@ -163,7 +163,7 @@ const Dashboard: React.FC<DashboardProps> = ({ user }) => {
       {/* Predicted Interest */}
       <Card className="mb-6">
         <CardHeader>
-          <CardTitle>Latest 2 Predicted Interest</CardTitle>
+          <CardTitle>Predicted Interest</CardTitle>
         </CardHeader>
         <CardContent> 
         { userData.predicted_interest ?
