@@ -1,69 +1,51 @@
 import { useEffect, useState } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { Button } from "@/components/ui/button";
-import { ArrowRight, Brain, ChartLine } from "lucide-react";
 import { Link } from "react-router-dom";
+import { ArrowRight } from "lucide-react";
 
 interface UserData {
-  scores: {};
+  scores: Record<string, number[]>;
   name: string;
-  marks: Record<string, number[]>;
   predicted_interest: string;
   roadmap: {
-    description: string;
+    prerequisites: string[];
     levels: {
-      Beginner: string[];
-      Intermediate: string[];
-      Advanced: string[];
+      Beginner: {
+        topics: string[];
+        resources: { link: string }[];
+        projects: string[];
+        time_estimate: string;
+      };
+      Intermediate: {
+        topics: string[];
+        resources: { link: string }[];
+        projects: string[];
+        time_estimate: string;
+      };
+      Advanced: {
+        topics: string[];
+        resources: { link: string }[];
+        projects: string[];
+        time_estimate: string;
+      };
     };
   };
 }
+
 interface DashboardProps {
   user: { uid: string };
 }
 
-
 const Dashboard: React.FC<DashboardProps> = ({ user }) => {
   const [userData, setUserData] = useState<UserData | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
-  const [roadshow,setroadshow]=useState<boolean>(false);
-
-  const containerStyle = {
-    position: 'fixed',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    backgroundColor: 'white',
-    padding: '20px',
-    border: '1px solid #ccc',
-    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-    zIndex: '1000',
-    minWidth: '300px',
-    minHeight: '200px',
-    borderRadius: '8px',
-    overflow: 'auto',
-    width: '90%',
-    height:'80%'
-  };
-
-  const closeButtonStyle = {
-    position: 'absolute',
-    top: '10px',
-    right: '20px',
-    cursor: 'pointer',
-    fontSize: '20px',
-    color: '#888',
-  };
+  const [roadshow, setRoadshow] = useState<boolean>(false);
 
   useEffect(() => {
     fetch(`http://localhost:5000/get_user_data?uid=${user.uid}`)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         setUserData(data);
-        console.log(userData.scores)
-          setLoading(false);
+        setLoading(false);
       })
       .catch((err) => {
         console.error("Error fetching user data:", err);
@@ -71,145 +53,155 @@ const Dashboard: React.FC<DashboardProps> = ({ user }) => {
       });
   }, [user]);
 
-  if (loading) return <p>Loading...</p>;
-  if (!userData) return <p>Error loading data.</p>;
-  const show=()=>{
-    setroadshow(true);
-  }
-  const onClose=()=>{
-    setroadshow(false);
-  }
+  if (loading) return <p className="text-white p-6">Loading...</p>;
+  if (!userData) return <p className="text-white p-6">Error loading data.</p>;
+
   return (
-    <div className="p-6">
-      <div>
-      <h2 className="text-4xl uppercase font-bold mb-10 underline">Welcome , {userData.name}</h2>
-      <Link to="/" className=" top-7 right-7 absolute text-primary hover:underline">
-        LogOut
-      </Link>
+    <div className="min-h-screen bg-gray-950 text-white flex flex-col">
+      {/* Navbar */}
+      <nav className="bg-gray-900 px-6 py-4 shadow-md flex justify-between items-center">
+        <h1 className="text-2xl font-bold tracking-wide">🎓 SmartInterest AI</h1>
+        <div className="flex items-center gap-6">
+          <span className="text-gray-300">
+            Welcome, <span className="font-semibold text-purple-400">{userData.name}</span>
+          </span>
+          <Link to="/" className="text-purple-400 hover:underline">LogOut</Link>
+        </div>
+      </nav>
+
+      <div className="flex-grow p-6 space-y-8">
+
+        {/* Roadmap Modal */}
+        {roadshow && (
+  <div className="fixed inset-0 bg-black bg-opacity-60 z-50 flex items-center justify-center px-4">
+    <div className="bg-slate-800 text-black rounded-2xl shadow-2xl w-full max-w-4xl p-6 overflow-auto max-h-[90vh] relative">
+      <button
+        onClick={() => setRoadshow(false)}
+        className="absolute top-4 right-6 text-2xl text-gray-500 hover:text-red-500 transition-colors"
+      >
+        ×
+      </button>
+
+      {/* Header */}
+      <div className="mb-6 border-b pb-4">
+        <h2 className="text-3xl font-extrabold text-purple-400 mb-2">{userData.predicted_interest}</h2>
+        <p className="text-gray-300">
+          <strong className="font-semibold text-gray-200">Prerequisites:</strong> {userData.roadmap.prerequisites.join(", ")}
+        </p>
       </div>
-      {roadshow ?
-      <div style={containerStyle}>
-      <div style={closeButtonStyle} onClick={onClose} >
-        &#x2715;
-      </div>
-      <div>
-        <h1 className="text-black font-mono text-2xl">{userData.predicted_interest[userData.predicted_interest.length-1]}</h1>
-      </div>
-      <br/>
-      <h2 className="text-black font-mono"><strong>Prerequisites:</strong> {userData.roadmap.prerequisites.join(", ")}</h2>
-      <br/>
-      <div className="text-black font-mono">
-        <h2 className="text-xl">Beginner</h2>
-        <br/>
-        <h2><strong>Topics:</strong> {userData.roadmap.levels.Beginner.topics.join(", ")}</h2>
-        <h2><strong>Resouces:</strong> {userData.roadmap.levels.Beginner.resources[0].link}</h2>
-        <h2><strong>Projects:</strong> {userData.roadmap.levels.Beginner.projects.join(", ")}</h2>
-        <h2><strong>Time Estimate:</strong> {userData.roadmap.levels.Beginner.time_estimate}</h2>
-      </div>
-      <br/>
-      <div className="text-black font-mono">
-        <h2 className="text-xl">Intermediate</h2>
-        <br/>
-        <h2><strong>Topics:</strong> {userData.roadmap.levels.Intermediate.topics.join(", ")}</h2>
-        <h2><strong>Resouces:</strong> {userData.roadmap.levels.Intermediate.resources[0].link}</h2>
-        <h2><strong>Projects:</strong> {userData.roadmap.levels.Intermediate.projects.join(", ")}</h2>
-        <h2><strong>Time Estimate:</strong> {userData.roadmap.levels.Intermediate.time_estimate}</h2>
-      </div>
-      <br/>
-      <div className="text-black font-mono">
-        <h2 className="text-xl">Advanced</h2>
-        <br/>
-        <h2><strong>Topics:</strong> {userData.roadmap.levels.Advanced.topics.join(", ")}</h2>
-        <h2><strong>Resouces:</strong> {userData.roadmap.levels.Advanced.resources[0].link}</h2>
-        <h2><strong>Projects:</strong> {userData.roadmap.levels.Advanced.projects.join(", ")}</h2>
-        <h2><strong>Time Estimate:</strong> {userData.roadmap.levels.Advanced.time_estimate}</h2>
-      </div>
+
+      {/* Levels */}
+      {["Beginner", "Intermediate", "Advanced"].map((level, idx) => {
+        const data = userData.roadmap.levels[level as keyof typeof userData.roadmap.levels];
+        const bgColors = ["bg-blue-50", "bg-yellow-50", "bg-purple-50"];
+        return (
+          <div key={level} className={`mb-6 rounded-xl p-5 border-l-4 ${bgColors[idx]} border-indigo-500`}>
+            <h3 className="text-2xl font-semibold text-indigo-800 mb-3">{level}</h3>
+            <p className="mb-2">
+              <strong>Topics:</strong> {data.topics.join(", ")}
+            </p>
+            <p className="mb-2">
+              <strong>Resources:</strong>{" "}
+              {data.resources.map((r, i) => (
+                <a
+                  key={i}
+                  href={r.link}
+                  className="text-blue-600 underline hover:text-blue-800 mr-2"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {new URL(r.link).hostname}
+                </a>
+              ))}
+            </p>
+            <p className="mb-2">
+              <strong>Projects:</strong> {data.projects.join(", ")}
+            </p>
+            <p>
+              <strong>Time Estimate:</strong> {data.time_estimate}
+            </p>
+          </div>
+        );
+      })}
     </div>
-      :
-      ''
-      }
-      {/* Marks Table */}
-      <Card className="mb-6">
-        <CardHeader>
-          <CardTitle>Recent Marks</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>Subject</TableHead>
-                <TableHead>Marks</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              { JSON.stringify(userData.scores)==='{}' ?
-                <TableRow >
-                  <TableCell>No data Available</TableCell>
-                  <TableCell></TableCell>
-                </TableRow>
+  </div>
+)}
+
+
+        {/* Recent Marks */}
+        <div className="bg-gray-900 p-6 rounded-2xl shadow-md">
+          <h3 className="text-xl font-semibold mb-4">📊 Recent Marks</h3>
+          <table className="w-full text-left">
+          {Object.keys(userData.scores).length === 0 ? 
+          ""
+          :
+          <thead>
+              <tr className="text-purple-400">
+                <th className="pb-2">Subject</th>
+                <th className="pb-2">Marks</th>
+              </tr>
+            </thead>
+          }
+            <tbody className="text-gray-300">
+              {Object.keys(userData.scores).length === 0 ? (
+                <tr><td colSpan={2}>No data available</td></tr>
+              ) : (
+                Object.entries(userData.scores).map(([subject, marks], idx) => (
+                  <tr key={idx} className="border-t border-gray-800">
+                    <td className="py-2">{subject}</td>
+                    <td className="py-2">{marks.join(", ")}</td>
+                  </tr>
+                ))
+              )}
+            </tbody>
+          </table>
+        </div>
+
+        {/* Predicted Interest */}
+        <div className="bg-gray-900 p-6 rounded-2xl shadow-md">
+          <h3 className="text-xl font-semibold mb-2">🔮 Predicted Interest</h3>
+          <p className="text-lg text-purple-400 font-bold">
+            {userData.predicted_interest || "No prediction made"}
+          </p>
+        </div>
+
+        {/* Personalized Roadmap Summary */}
+        <div className="bg-gray-900 p-6 rounded-2xl shadow-md">
+          <h3 className="text-xl font-semibold mb-4">🗺️ Personalized Roadmap</h3>
+          <ul className="list-disc list-inside text-gray-300">
+            {
+            userData.roadmap==null ?
+            ''
             :
-          Object.entries(userData.scores || {}).map(([subject, scores]) => (
-            <TableRow key={subject}>
-              <TableCell>{subject}</TableCell>
-              <TableCell>{scores.join(", ")}</TableCell>
-            </TableRow>
-          ))
+            ["Beginner", "Intermediate", "Advanced"].map((level) => (
+              <li key={level}>
+                <strong>{level}:</strong> {userData.roadmap.levels[level as keyof typeof userData.roadmap.levels].topics.join(", ")}
+              </li>
+            ))
           }
-            </TableBody>
-          </Table>
-        </CardContent>
-      </Card>
-
-      {/* Predicted Interest */}
-      <Card className="mb-6">
-        <CardHeader>
-          <CardTitle>Predicted Interest</CardTitle>
-        </CardHeader>
-        <CardContent> 
-        { userData.predicted_interest ?
-          userData.predicted_interest.map((v,e)=>{
-            return (
-            <p className="text-lg font-semibold" key={e}>{v}</p>
-            )
-          })
-          
-          :
-          <p>No prediction made</p>
-        }
-          {/* <p className="text-lg font-semibold">{userData.predicted_interest}</p> */}
-        </CardContent>
-      </Card>
-
-      {/* Roadmap */}
-      <Card>
-        <CardHeader>
-          <CardTitle>Personalized Roadmap</CardTitle>
-        </CardHeader>
-        <CardContent>
-          { userData.roadmap ?
-          <>
-          <ul className="list-disc list-inside">
-            <li><strong>Beginner:</strong> {userData.roadmap.levels.Beginner.topics.join(", ")}</li>
-            <li><strong>Intermediate:</strong> {userData.roadmap.levels.Intermediate.topics.join(", ")}</li>
-            <li><strong>Advanced:</strong> {userData.roadmap.levels.Advanced.topics.join(", ")}</li>
           </ul>
-          <br/>
-          <Button size="lg" className="bg-primary hover:bg-primary/90" onClick={show}>
+          { userData.roadmap==null ?
+          <p className="text-gray-300">No roadmap available</p>
+          
+          : 
+          <button
+            onClick={() => setRoadshow(true)}
+            className="mt-4 bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-xl"
+          >
             Show full roadmap
-          </Button>
-          </>
-          :
-          <p className="mb-4">No data available</p>
+          </button>
           }
-        </CardContent>
-      </Card>
-      <br/>
-      <Link to="/tests"  className="flex justify-center">
-      <Button size="lg" className="bg-primary hover:bg-primary/90 place-self-center">
-        Start Analysis
-      <ArrowRight className="ml-2 w-4 h-4" />
-      </Button>
-      </Link>
+        </div>
+
+        {/* CTA Button */}
+        <div className="flex justify-center">
+          <Link to="/tests">
+            <button className="bg-purple-600 hover:bg-purple-700 px-6 py-3 rounded-xl text-white flex items-center gap-2">
+              Start Analysis <ArrowRight className="w-4 h-4" />
+            </button>
+          </Link>
+        </div>
+      </div>
     </div>
   );
 };

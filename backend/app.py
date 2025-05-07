@@ -160,7 +160,7 @@ def submit_answers():
 @app.route("/update_user_data", methods=["POST"])
 def update_user_data():
     data = request.get_json()
-    print("Received Data:", data)
+    # print("Received Data:", data)
     if not data:
         return jsonify({"error": "No input data provided"}), 400
     user_id = data.get("uid")
@@ -187,13 +187,15 @@ def update_user_data():
         ]
         updated_projects = [p for p in updated_projects if p]
         interest_label = data['predicted_interest']['predicted_interest']
-        updated_interests = user.get("predicted_interest", [])
-        updated_interests.append(interest_label)
+        print("Fsd")
+        updated_interests = user.get("predicted_interest")
+        # updated_interests.append(interest_label)
         print(updated_scores)
         print(updated_projects)
         print(updated_interests)
-        if len(updated_interests) > 2:
-            updated_interests = updated_interests[-2:]
+        # if len(updated_interests) > 2:
+        #     updated_interests = data['predicted_interest']['predicted_interest']
+        updated_interests = data['predicted_interest']['predicted_interest']
         users_collection.update_one(
             {"uid": user_id},
             {"$set": {

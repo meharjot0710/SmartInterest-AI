@@ -38,11 +38,11 @@ const Hero = () => {
               <p className="text-muted-foreground">Prediction Accuracy</p>
             </div>
             <div className="text-center">
-              <h3 className="text-3xl font-bold text-primary mb-2">10k+</h3>
+              <h3 className="text-3xl font-bold text-primary mb-2">100+</h3>
               <p className="text-muted-foreground">Students Analyzed</p>
             </div>
             <div className="text-center">
-              <h3 className="text-3xl font-bold text-primary mb-2">87%</h3>
+              <h3 className="text-3xl font-bold text-primary mb-2">90%</h3>
               <p className="text-muted-foreground">Improvement Rate</p>
             </div>
           </div>
